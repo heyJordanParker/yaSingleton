@@ -1,19 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using Elarion.Singleton.Utililty;
 using UnityEngine;
+using yaSingleton.Utililty;
 
-namespace Elarion.Singleton.Helpers {
+namespace yaSingleton.Helpers {
     /// <summary>
     /// Singleton updater class. Instantiates a single MonoBehaviour and uses it to send Unity's events to all singletons.
     /// </summary>
     public class SingletonUpdater : ExecutorBehavior {
-        [SerializeField, HideInInspector]
-        private List<ScriptableObject> _singletons = new List<ScriptableObject>();
-
+        
         private static SingletonUpdater _updater;
 
-        private static SingletonUpdater Updater {
+        internal static SingletonUpdater Updater {
             get {
                 if(_updater == null) {
                     _updater = Create<SingletonUpdater>("Singleton Updater", true);
@@ -23,6 +22,16 @@ namespace Elarion.Singleton.Helpers {
             }
         }
         
+        [SerializeField, HideInInspector]
+        private List<ScriptableObject> _singletons = new List<ScriptableObject>();
+        
+        /// <summary>
+        /// Returns a list of the currently active singletons. Useful for debugging.
+        /// </summary>
+        public List<ScriptableObject> Singletons {
+            get { return _singletons; }
+        }
+
         /// <summary>
         /// Registers a singleton to the global updater. Once registered there will be no need to unregister it since it'll only happen when the application quits.
         /// </summary>

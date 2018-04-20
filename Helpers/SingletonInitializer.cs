@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Elarion.Singleton.Attributes;
 using UnityEngine;
+using yaSingleton.Attributes;
 
-namespace Elarion.Singleton.Helpers {
+namespace yaSingleton.Helpers {
     /// <summary>
     /// Singleton initializer. Scans all assemblies for singletons and initializes them before the scene has loaded. Add any assemblies you'd want to ignore to the BuiltinAssemblies array.
     /// </summary>

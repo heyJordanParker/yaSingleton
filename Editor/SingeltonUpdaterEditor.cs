@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Elarion.Singleton.Helpers;
 using UnityEditor;
 using UnityEngine;
+using yaSingleton.Helpers;
 
-namespace Elarion.Singleton.Editor {
+namespace yaSingleton.Editor {
     [CustomEditor(typeof(SingletonUpdater), true)]
     public class SingeltonUpdaterEditor : UnityEditor.Editor {
         

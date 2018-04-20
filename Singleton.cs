@@ -1,7 +1,7 @@
 ﻿using System;
-using Elarion.Singleton.Attributes;
+using yaSingleton.Attributes;
 
-namespace Elarion.Singleton {
+namespace yaSingleton {
     /// <summary>
     /// Singleton class. It'll be initialized before the Awake method of all other MonoBehaviours.
     /// Inherit by passing the inherited type (e.g. class GameManager : Singleton&lt;GameManager&gt;)

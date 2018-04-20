@@ -1,4 +1,4 @@
-﻿namespace Elarion.Singleton {
+﻿namespace yaSingleton {
     /// <summary>
     /// Singleton class. It'll be lazy-initialized when first accessed.
     /// Inherit by passing the inherited type (e.g. class GameManager : LazySingleton&lt;GameManager&gt;)

@@ -1,8 +1,8 @@
-﻿using Elarion.Singleton.Helpers;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
+using yaSingleton.Helpers;
 
-namespace Elarion.Singleton.Editor {
+namespace yaSingleton.Editor {
     /// <summary>
     /// Fallback Singleton Inspector - validates the singleton location. Extend this class if you want the validation in your singletons.
     /// Note: The editor targets ScriptableObjects due BaseSingleton being abstract (no custom inspectors for abstract types).
@@ -36,7 +36,7 @@ namespace Elarion.Singleton.Editor {
             var path = AssetDatabase.GetAssetPath(this);
             var separator = System.IO.Path.DirectorySeparatorChar;
 
-            if(!path.Contains(separator + "Resources" + separator)) {
+            if(!string.IsNullOrEmpty(path) && !path.Contains(separator + "Resources" + separator)) {
                 EditorGUILayout.HelpBox(
                     "All " + target.GetType().Name +
                     " (Singleton) instances must be in the Resources folder. Otherwise they won't be loaded outside of the Editor.",

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Elarion.Singleton.Utililty {
+namespace yaSingleton.Utililty {
     public class ExecutorBehavior : MonoBehaviour {
         [SerializeField, HideInInspector]
         private bool _dontDestroyOnLoad;
