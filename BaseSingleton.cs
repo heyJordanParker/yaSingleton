@@ -27,7 +27,6 @@ namespace yaSingleton {
         public virtual void OnPostRender() { }
         public virtual void OnPreCull() { }
         public virtual void OnPreRender() { }
-        public virtual void OnReset() { }
 
         #endregion
 

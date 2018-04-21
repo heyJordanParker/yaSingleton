@@ -53,7 +53,6 @@ namespace yaSingleton.Helpers {
             Updater.PostRenderEvent += singleton.OnPostRender;
             Updater.PreCullEvent += singleton.OnPreCull;
             Updater.PreRenderEvent += singleton.OnPreRender;
-            Updater.ResetEvent += singleton.OnReset;
 
             Updater._singletons.Add(singleton);
         }
