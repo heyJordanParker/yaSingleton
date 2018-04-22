@@ -2,6 +2,8 @@
 
 Yet Another Singleton library for [Unity](http://www.unity3d.com/). Based on ScriptableObject instead of the more conventionally used MonoBehaviour.
 
+Example Unity project can be found [here](https://github.com/jedybg/yaSingleton-Example-Project). 
+
 ## Why
 
 Why use yaSingleton and why use ScriptableObjects?
