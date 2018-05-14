@@ -12,10 +12,7 @@ namespace yaSingleton {
     public abstract class Singleton<TSingleton> : BaseSingleton where TSingleton : BaseSingleton {
         public static TSingleton Instance { get; private set; }
 
-        // Called via Reflection from the SingletonInitializer
-        // ReSharper disable once UnusedMember.Global
-        [SingletonCreateInstance]
-        protected static void CreateInstance() {
+        internal override void CreateInstance() {
             if(Instance != null) {
                 return;
             }

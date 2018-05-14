@@ -1,7 +1,9 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using yaSingleton.Helpers;
+using Debug = UnityEngine.Debug;
 
 namespace yaSingleton {
     /// <summary>
@@ -9,14 +11,17 @@ namespace yaSingleton {
     /// If you're looking to create a singleton, inherit Singleton or LazySingleton.
     /// </summary>
     public abstract class BaseSingleton : ScriptableObject {
+
+        internal abstract void CreateInstance();
+        
         protected virtual void Initialize() {
             SingletonUpdater.RegisterSingleton(this, Deinitialize);
         }
-
-        #region UnityEvents
-
+        
         protected virtual void Deinitialize() { }
-
+        
+        #region UnityEvents
+        
         public virtual void OnFixedUpdate() { }
         public virtual void OnUpdate() { }
         public virtual void OnLateUpdate() { }
@@ -84,8 +89,23 @@ namespace yaSingleton {
         
         #endregion
 
+        private static BaseSingleton[] _allSingletons = null;
+        
+        public static BaseSingleton[] AllSingletons {
+            get {
+                if(_allSingletons == null) {
+                    _allSingletons = Resources.LoadAll<BaseSingleton>(string.Empty).Where(
+                            s => s.GetType().IsSubclassOf(typeof(BaseSingleton)))
+                        .ToArray();
+                }
+                
+                return _allSingletons;
+            }
+        }
+
+
         protected static T Create<T>() where T : BaseSingleton {
-            var instance = Resources.FindObjectsOfTypeAll<T>().FirstOrDefault();
+            var instance = AllSingletons.FirstOrDefault(s => s.GetType() == typeof(T)) as T;
 
             instance = instance ? instance : CreateInstance<T>();
 

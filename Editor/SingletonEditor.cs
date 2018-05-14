@@ -17,12 +17,12 @@ namespace yaSingleton.Editor {
         protected bool autoDrawSingletonValidation = true;
 
         protected virtual void OnEnable() {
-            isSingletonEditor = target && SingletonInitializer.IsSingleton(target.GetType());
+            isSingletonEditor = target && target.GetType().IsSubclassOf(typeof(BaseSingleton));
         }
 
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
-
+            
             if(autoDrawSingletonValidation) {
                 DrawSingletonValidation();
             }
@@ -33,14 +33,15 @@ namespace yaSingleton.Editor {
                 return;
             }
 
-            var path = AssetDatabase.GetAssetPath(this);
+            var path = AssetDatabase.GetAssetPath(target);
             var separator = System.IO.Path.DirectorySeparatorChar;
-
+            
             if(!string.IsNullOrEmpty(path) && !path.Contains(separator + "Resources" + separator)) {
+                EditorGUILayout.HelpBox("Disabled.", MessageType.Warning, true);
                 EditorGUILayout.HelpBox(
                     "All " + target.GetType().Name +
-                    " (Singleton) instances must be in the Resources folder. Otherwise they won't be loaded outside of the Editor.",
-                    MessageType.Warning, true);
+                    " (Singleton) instances must be in the Resources folder. Otherwise they can't be found by the engine.",
+                    MessageType.Info, true);
             }
         }
     }

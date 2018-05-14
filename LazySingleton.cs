@@ -9,6 +9,11 @@
             get { return Initializer<TSingleton>.LazyInstance; }
         }
 
+        /// <summary>
+        /// No need to manually create instances of LazySingletons
+        /// </summary>
+        internal override void CreateInstance() { }
+
         // ReSharper disable once ClassNeverInstantiated.Local
         private class Initializer<T> where T : BaseSingleton {
             static Initializer() { }
