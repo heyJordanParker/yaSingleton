@@ -1,9 +1,7 @@
 ﻿using System.Collections;
-using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using yaSingleton.Helpers;
-using Debug = UnityEngine.Debug;
 
 namespace yaSingleton {
     /// <summary>
@@ -94,9 +92,12 @@ namespace yaSingleton {
         public static BaseSingleton[] AllSingletons {
             get {
                 if(_allSingletons == null) {
-                    _allSingletons = Resources.LoadAll<BaseSingleton>(string.Empty).Where(
-                            s => s.GetType().IsSubclassOf(typeof(BaseSingleton)))
+                    _allSingletons = Resources.FindObjectsOfTypeAll<ScriptableObject>().Where(
+                            s => s.GetType().IsSubclassOf(typeof(BaseSingleton))).Select(s => s as BaseSingleton)
                         .ToArray();
+//                    _allSingletons = Resources.LoadAll<BaseSingleton>(string.Empty).Where(
+//                            s => s.GetType().IsSubclassOf(typeof(BaseSingleton)))
+//                        .ToArray();
                 }
                 
                 return _allSingletons;
