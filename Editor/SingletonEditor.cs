@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using yaSingleton.Helpers;
 
 namespace yaSingleton.Editor {
     /// <summary>

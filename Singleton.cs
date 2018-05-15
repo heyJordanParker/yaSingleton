@@ -1,5 +1,4 @@
 ﻿using System;
-using yaSingleton.Attributes;
 
 namespace yaSingleton {
     /// <summary>
@@ -7,7 +6,6 @@ namespace yaSingleton {
     /// Inherit by passing the inherited type (e.g. class GameManager : Singleton&lt;GameManager&gt;)
     /// </summary>
     /// <typeparam name="TSingleton">The Inherited Singleton's Type</typeparam>
-    [Singleton]
     [Serializable]
     public abstract class Singleton<TSingleton> : BaseSingleton where TSingleton : BaseSingleton {
         public static TSingleton Instance { get; private set; }

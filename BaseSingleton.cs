@@ -1,9 +1,7 @@
 ﻿using System.Collections;
-using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using yaSingleton.Helpers;
-using Debug = UnityEngine.Debug;
 
 namespace yaSingleton {
     /// <summary>
