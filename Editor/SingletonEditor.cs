@@ -34,8 +34,13 @@ namespace yaSingleton.Editor {
 
             var path = AssetDatabase.GetAssetPath(target);
             var separator = System.IO.Path.DirectorySeparatorChar;
+            var altSeparator = System.IO.Path.AltDirectorySeparatorChar;
+
+            var isPathInvalid = string.IsNullOrEmpty(path) ||
+                              (!path.Contains(separator + "Resources" + separator) &&
+                               !path.Contains(altSeparator + "Resources" + altSeparator));
             
-            if(!string.IsNullOrEmpty(path) && !path.Contains(separator + "Resources" + separator)) {
+                if(isPathInvalid) {
                 EditorGUILayout.HelpBox("Disabled.", MessageType.Warning, true);
                 EditorGUILayout.HelpBox(
                     "All " + target.GetType().Name +
