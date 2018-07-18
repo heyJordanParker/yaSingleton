@@ -2,13 +2,14 @@
 using System.Linq;
 using UnityEngine;
 using yaSingleton.Helpers;
+using yaSingleton.Utililty;
 
 namespace yaSingleton {
     /// <summary>
     /// Base class for singletons. Contains method stubs and the Create method. Use this to create custom Singleton flavors.
     /// If you're looking to create a singleton, inherit Singleton or LazySingleton.
     /// </summary>
-    public abstract class BaseSingleton : ScriptableObject {
+    public abstract class BaseSingleton : YScriptableObject {
 
         internal abstract void CreateInstance();
         
@@ -19,7 +20,8 @@ namespace yaSingleton {
         protected virtual void Deinitialize() { }
         
         #region UnityEvents
-        
+
+        public virtual void OnStart() { }
         public virtual void OnFixedUpdate() { }
         public virtual void OnUpdate() { }
         public virtual void OnLateUpdate() { }
@@ -93,7 +95,7 @@ namespace yaSingleton {
             get {
                 if(_allSingletons == null) {
                     _allSingletons = Resources.LoadAll<BaseSingleton>(string.Empty).Where(
-                            s => s.GetType().IsSubclassOf(typeof(BaseSingleton)))
+                            s => s.GetType().IsSubclassOf(typeof(BaseSingleton)) && !s.GetType().IsAbstract)
                         .ToArray();
                 }
                 

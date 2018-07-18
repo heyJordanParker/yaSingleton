@@ -39,6 +39,8 @@ namespace yaSingleton.Helpers {
         internal static void RegisterSingleton(BaseSingleton singleton, Action deinitialize) {
             Updater.DestroyEvent += deinitialize;
 
+            Updater.StartEvent += singleton.OnStart;            
+            
             Updater.FixedUpdateEvent += singleton.OnFixedUpdate;
             Updater.UpdateEvent += singleton.OnUpdate;
             Updater.LateUpdateEvent += singleton.OnLateUpdate;
