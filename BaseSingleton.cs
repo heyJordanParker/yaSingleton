@@ -11,6 +11,10 @@ namespace yaSingleton {
     /// </summary>
     public abstract class BaseSingleton : YScriptableObject {
 
+        protected static SingletonUpdater Updater {
+            get { return SingletonUpdater.Updater; }
+        }
+        
         internal abstract void CreateInstance();
         
         protected virtual void Initialize() {
@@ -40,51 +44,48 @@ namespace yaSingleton {
         /// <summary>
         ///   <para>Starts a coroutine.</para>
         /// </summary>
-        /// <param name="routine"></param>
+        /// <param name="routine">The coroutine</param>
         protected Coroutine StartCoroutine(IEnumerator routine) {
-            return SingletonUpdater.Updater.StartCoroutine(routine);
+            return Updater.StartCoroutine(routine);
         }
 
         /// <summary>
         ///   <para>Starts a coroutine named methodName.</para>
         /// </summary>
-        /// <param name="methodName"></param>
+        /// <param name="methodName">Name of coroutine.</param>
         protected Coroutine StartCoroutine(string methodName) {
-            return SingletonUpdater.Updater.StartCoroutine(methodName);
+            return Updater.StartCoroutine(methodName);
         }
 
         /// <summary>
         ///   <para>Stops the first coroutine named methodName, or the coroutine stored in routine running on this behaviour.</para>
         /// </summary>
-        /// <param name="methodName">Name of coroutine.</param>
         /// <param name="routine">Name of the function in code, including coroutines.</param>
         protected void StopCoroutine(Coroutine routine) {
-            SingletonUpdater.Updater.StopCoroutine(routine);
+            Updater.StopCoroutine(routine);
         }
         
         /// <summary>
         ///   <para>Stops the first coroutine named methodName, or the coroutine stored in routine running on this behaviour.</para>
         /// </summary>
-        /// <param name="methodName">Name of coroutine.</param>
         /// <param name="routine">Name of the function in code, including coroutines.</param>
         protected void StopCoroutine(IEnumerator routine) {
-            SingletonUpdater.Updater.StopCoroutine(routine);
+            Updater.StopCoroutine(routine);
         }
         
         /// <summary>
         ///   <para>Stops the first coroutine named methodName, or the coroutine stored in routine running on this behaviour.</para>
         /// </summary>
         /// <param name="methodName">Name of coroutine.</param>
-        /// <param name="routine">Name of the function in code, including coroutines.</param>
         protected void StopCoroutine(string methodName) {
-            SingletonUpdater.Updater.StopCoroutine(methodName);
+            Updater.StopCoroutine(methodName);
         }
         
         /// <summary>
         ///   <para>Stops all coroutines running on this behaviour.</para>
         /// </summary>
         protected void StopAllCoroutines() {
-            SingletonUpdater.Updater.StopAllCoroutines();
+            Updater.StopAllCoroutines();
         }
         
         #endregion

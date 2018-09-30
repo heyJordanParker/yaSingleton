@@ -4,6 +4,10 @@ using UnityEngine;
 using yaSingleton.Utililty;
 
 namespace yaSingleton.Helpers {
+    
+    // TODO split update logic into separate components
+    // TODO use reflection  to check if a base method is overriden and if yes - add an appropriate updater and hook the method in it
+    
     /// <summary>
     /// Singleton updater class. Instantiates a single MonoBehaviour and uses it to send Unity's events to all singletons.
     /// </summary>
