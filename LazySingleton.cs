@@ -18,7 +18,7 @@
         private class Initializer<T> where T : BaseSingleton {
             static Initializer() { }
 
-            internal static readonly T LazyInstance = Create<T>();
+            internal static readonly T LazyInstance = GetOrCreate<T>();
         }
     }
 }

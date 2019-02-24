@@ -1,15 +1,16 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using yaSingleton.Helpers;
-using yaSingleton.Utililty;
+using yaSingleton.Utility;
 
 namespace yaSingleton {
     /// <summary>
     /// Base class for singletons. Contains method stubs and the Create method. Use this to create custom Singleton flavors.
     /// If you're looking to create a singleton, inherit Singleton or LazySingleton.
     /// </summary>
-    public abstract class BaseSingleton : YScriptableObject {
+    public abstract class BaseSingleton : PreloadedScriptableObject {
 
         protected static SingletonUpdater Updater {
             get { return SingletonUpdater.Updater; }
@@ -17,15 +18,43 @@ namespace yaSingleton {
         
         internal abstract void CreateInstance();
         
+        // Reduce the visibility of OnEnable; Inheritors should override Initialize instead.
+        private new void OnEnable() {
+            base.OnEnable();
+#if UNITY_EDITOR
+            if(!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) {
+                return;
+            }
+#endif
+            AllSingletons.Add(this);
+        }
+        
+        // Reduce the visibility of OnDisable; Inheritors should override Deinitialize instead.
+        private new void OnDisable() {
+            base.OnDisable();
+        }
+
         protected virtual void Initialize() {
-            SingletonUpdater.RegisterSingleton(this, Deinitialize);
+            Updater.DestroyEvent += Deinitialize;
+
+            Updater.FixedUpdateEvent += OnFixedUpdate;
+            Updater.UpdateEvent += OnUpdate;
+            Updater.LateUpdateEvent += OnLateUpdate;
+
+            Updater.ApplicationFocusEvent += OnApplicationFocus;
+            Updater.ApplicationPauseEvent += OnApplicationPause;
+            Updater.ApplicationQuitEvent += OnApplicationQuit;
+
+            Updater.DrawGizmosEvent += OnDrawGizmos;
+            Updater.PostRenderEvent += OnPostRender;
+            Updater.PreCullEvent += OnPreCull;
+            Updater.PreRenderEvent += OnPreRender;
         }
         
         protected virtual void Deinitialize() { }
         
         #region UnityEvents
 
-        public virtual void OnStart() { }
         public virtual void OnFixedUpdate() { }
         public virtual void OnUpdate() { }
         public virtual void OnLateUpdate() { }
@@ -90,22 +119,9 @@ namespace yaSingleton {
         
         #endregion
 
-        private static BaseSingleton[] _allSingletons = null;
-        
-        public static BaseSingleton[] AllSingletons {
-            get {
-                if(_allSingletons == null) {
-                    _allSingletons = Resources.LoadAll<BaseSingleton>(string.Empty).Where(
-                            s => s.GetType().IsSubclassOf(typeof(BaseSingleton)) && !s.GetType().IsAbstract)
-                        .ToArray();
-                }
-                
-                return _allSingletons;
-            }
-        }
+        public static readonly List<BaseSingleton> AllSingletons = new List<BaseSingleton>();
 
-
-        protected static T Create<T>() where T : BaseSingleton {
+        protected static T GetOrCreate<T>() where T : BaseSingleton {
             var instance = AllSingletons.FirstOrDefault(s => s.GetType() == typeof(T)) as T;
 
             instance = instance ? instance : CreateInstance<T>();
@@ -113,6 +129,13 @@ namespace yaSingleton {
             instance.Initialize();
 
             return instance;
+        }
+        
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void InitializeSingletons() {
+            foreach(var singleton in AllSingletons) {
+                singleton.CreateInstance();
+            }
         }
     }
 }

@@ -2,7 +2,10 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace yaSingleton.Utililty {
+namespace yaSingleton.Utility {
+    /// <summary>
+    /// Executor behaviour that can be used as a proxy to call Unity events.
+    /// </summary>
     public class ExecutorBehavior : MonoBehaviour {
         [SerializeField, HideInInspector]
         private bool _dontDestroyOnLoad;
@@ -26,8 +29,6 @@ namespace yaSingleton.Utililty {
         public event Action PostRenderEvent = () => { };
         public event Action PreCullEvent = () => { };
         public event Action PreRenderEvent = () => { };
-        public event Action ResetEvent = () => { };
-        public event Action ValidateEvent = () => { };
 
         public new bool DontDestroyOnLoad {
             get { return _dontDestroyOnLoad; }
@@ -118,14 +119,6 @@ namespace yaSingleton.Utililty {
 
         private void OnPreRender() {
             PreRenderEvent();
-        }
-
-        private void OnValidate() {
-            ValidateEvent();
-        }
-
-        private void Reset() {
-            ResetEvent();
         }
 
         #endregion

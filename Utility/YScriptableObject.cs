@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace yaSingleton.Utililty {
+namespace yaSingleton.Utility {
     /// <inheritdoc />
     /// <summary>
     /// Base class used by the editor. Enables building custom editor for generic classes.

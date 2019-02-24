@@ -14,6 +14,7 @@ Why use yaSingleton and why use ScriptableObjects?
  * Thread-safe LazySingleton.
  * Better performance; all singletons share the same Update events.
  * Easy to integrate with your existing code base.
+ * Just works! No need to initialize anything or mess with the Resources folder.
 
 ## Getting Started
 
@@ -131,8 +132,9 @@ protected override void OnFixedUpdate() {
 }
 ```
 
-All supported Unity events are:
-**OnFixedUpdate**, **OnUpdate**, **OnLateUpdate**, **OnApplicationFocus**, **OnApplicationPause**, **OnApplicationQuit**, **OnDrawGizmos**, **OnPostRender**, **OnPreCull**, **OnPreRender**. They're all using the original event's name with the *On* prefix (if it wasn't in the name already).
+Singletons automatically create a **single** MonoBehaviour to handle all Unity events and coroutines for improved performance. Supported Unity events are:
+
+**OnFixedUpdate**, **OnUpdate**, **OnLateUpdate**, **OnApplicationFocus**, **OnApplicationPause**, **OnApplicationQuit**, **OnDrawGizmos**, **OnPostRender**, **OnPreCull**, **OnPreRender**. They're all using the original event's name with the *On* prefix (if it wasn't in the name already).   
 
 ### Accessing scene objects
 
@@ -206,4 +208,4 @@ The project is, of course, open to contributions. Just fork it and post a pull r
 
 ## License
 
-This project is licensed under the BSD 3-Clause - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the BSD 3-Clause - see the [LICENSE](LICENSE) file for details.

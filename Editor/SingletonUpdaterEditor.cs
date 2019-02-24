@@ -5,10 +5,8 @@ using yaSingleton.Helpers;
 
 namespace yaSingleton.Editor {
     [CustomEditor(typeof(SingletonUpdater), true)]
-    public class SingeltonUpdaterEditor : UnityEditor.Editor {
+    public class SingletonUpdaterEditor : UnityEditor.Editor {
         
-        private SerializedProperty _singletons;
-
         private Dictionary<int, UnityEditor.Editor> _editors;
 
         private Dictionary<int, bool> _foldouts;
@@ -26,8 +24,6 @@ namespace yaSingleton.Editor {
         }
 
         public void OnEnable() {
-            _singletons = serializedObject.FindProperty("_singletons");
-            
             _editors = new Dictionary<int, UnityEditor.Editor>();
             
             _foldouts = new Dictionary<int, bool>();
@@ -38,7 +34,7 @@ namespace yaSingleton.Editor {
             
             EditorGUILayout.LabelField("Singletons", BoldLabel);
             
-            for(int i = 0; i < _singletons.arraySize; ++i) {
+            for(int i = 0; i < BaseSingleton.AllSingletons.Count; ++i) {
                 if(!_editors.ContainsKey(i)) {
                     _editors.Add(i, null);
                 }
@@ -47,7 +43,7 @@ namespace yaSingleton.Editor {
                     _foldouts.Add(i, true);
                 }
                 
-                var singleton = _singletons.GetArrayElementAtIndex(i).objectReferenceValue;
+                var singleton = BaseSingleton.AllSingletons[i];
 
                 _foldouts[i] = EditorGUILayout.InspectorTitlebar(_foldouts[i], singleton);
                 
