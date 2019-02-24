@@ -3,7 +3,7 @@
 namespace yaSingleton {
     /// <summary>
     /// Singleton class. It'll be initialized before the Awake method of all other MonoBehaviours.
-    /// Inherit by passing the inherited type (e.g. class GameManager : Singleton&lt;GameManager&gt;)
+    /// Inherit by passing the inherited type (e.g. class GameManager : Singleton<GameManager>)
     /// </summary>
     /// <typeparam name="TSingleton">The Inherited Singleton's Type</typeparam>
     [Serializable]
