@@ -208,4 +208,4 @@ The project is, of course, open to contributions. Just fork it and post a pull r
 
 ## License
 
-This project is licensed under the BSD 3-Clause - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT - see the [LICENSE](LICENSE) file for details.
