@@ -1,6 +1,6 @@
 # yaSingleton
 
-Yet Another Singleton library for [Unity](http://www.unity3d.com/). Based on ScriptableObject instead of the more conventionally used MonoBehaviour.
+Yet Another Singleton library for [Unity](http://www.unity3d.com/) and part of the [Elarion Framework](https://github.com/jedybg/Elarion). It provides Singletons based on ScriptableObjects instead of the more conventionally used MonoBehaviours.
 
 Example Unity project can be found [here](https://github.com/jedybg/yaSingleton-Example-Project). 
 
@@ -12,7 +12,7 @@ Why use yaSingleton and why use ScriptableObjects?
  * Single point of entry that's guaranteed to run before any of your Awake scripts.
  * Easy versioning. Since singletons are saved as ScriptableObjects, they're outside the scenes and thus easy to version control.
  * Thread-safe LazySingleton.
- * Better performance; all singletons share the same Update events.
+ * Improved performance; all singletons share a single set of events (Update, LateUpdate, and FixedUpdate).
  * Easy to integrate with your existing code base.
  * Just works! No need to initialize anything or mess with the Resources folder.
 
