@@ -121,13 +121,13 @@ void FixedUpdate() {
 }
 // become:
 
-protected override void OnUpdate() {
+public override void OnUpdate() {
     // Update code
 }
-protected override void OnLateUpdate() {
+public override void OnLateUpdate() {
     // Late Update code
 }
-protected override void OnFixedUpdate() {
+public override void OnFixedUpdate() {
     // Fixed Update code
 }
 ```
