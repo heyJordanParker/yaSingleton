@@ -1,3 +1,4 @@
+using UnityEngine;
 using yaSingleton.Helpers;
 
 namespace yaSingleton.Utility {
@@ -5,7 +6,7 @@ namespace yaSingleton.Utility {
     /// <summary>
     /// ScriptableObject that automagically adds itself to Unity's preloaded assets.
     /// </summary>
-    public abstract class PreloadedScriptableObject : YScriptableObject {
+    public abstract class PreloadedScriptableObject : ScriptableObject {
         protected virtual void OnEnable() {
 #if UNITY_EDITOR
             if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) {

@@ -9,7 +9,7 @@ namespace yaSingleton.Editor {
     /// Fallback Singleton Inspector - validates the singleton location. Extend this class if you want the validation in your singletons.
     /// Note: The editor targets ScriptableObjects due BaseSingleton being abstract (no custom inspectors for abstract types).
     /// </summary>
-    [CustomEditor(typeof(YScriptableObject), true, isFallback = true)]
+    [CustomEditor(typeof(BaseSingleton), true, isFallback = true)]
     public class SingletonEditor : UnityEditor.Editor {
         protected bool isSingletonEditor;
 
