@@ -75,10 +75,10 @@ Next, replace initialization methods:
 
 ```
 void Awake() {
-    // Initialization code
+    // Initialization code here. This happens before any scene has loaded, so it doesn't have access to GameObjects.
 }
 void Start() {
-    // Initialization code
+    // Initialization code here. This happens on the first frame of the application and has access to all scenes.
 }
 // become:
 
