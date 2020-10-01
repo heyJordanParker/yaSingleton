@@ -7,6 +7,14 @@ namespace yaSingleton.Utility {
     /// ScriptableObject that automagically adds itself to Unity's preloaded assets.
     /// </summary>
     public abstract class PreloadedScriptableObject : ScriptableObject {
+
+#if UNITY_EDITOR
+        [UnityEditor.InitializeOnLoadMethod]
+        private static void LoadPreloadedAssetsInEditor() {
+            UnityEditor.PlayerSettings.GetPreloadedAssets();
+        }
+#endif
+
         protected virtual void OnEnable() {
 #if UNITY_EDITOR
             if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) {
